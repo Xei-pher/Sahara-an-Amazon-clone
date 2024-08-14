@@ -1,4 +1,4 @@
-import { cart, addToCart, updateCartQuantity } from '../data/cart.js';
+import { cart, addToCart, updateCartQuantity, saveCart } from '../data/cart.js';
 import { products } from '../data/products.js';
 import {formatPricing} from './utils/money.js';
 let prodHTML = '';
@@ -64,6 +64,7 @@ document.querySelectorAll(".js-add-to-cart").forEach(button => {
         const prodId = button.dataset.productId;
         addToCart(prodId);
         updateCartQuantity();
+        saveCart();
     })
 })
 

@@ -1,4 +1,4 @@
-import { cart, addToCart, updateCartQuantity, removeFromCart } from '../data/cart.js';
+import { cart, addToCart, updateCartQuantity, removeFromCart, saveCart } from '../data/cart.js';
 import {products} from '../data/products.js';
 import {formatPricing} from './utils/money.js';
 let cartItems = ``
@@ -97,6 +97,7 @@ document.querySelectorAll('.js-delete-item').forEach(button => {
   button.addEventListener('click', () => {
     const prodId = button.dataset.productId;
     removeFromCart(prodId);
-    document.querySelector('.js-order-summary').removeChild(document.querySelector(`.js-cart-item-container-${prodId}`))
+    document.querySelector('.js-order-summary').removeChild(document.querySelector(`.js-cart-item-container-${prodId}`));
+    saveCart();
   })
 })
