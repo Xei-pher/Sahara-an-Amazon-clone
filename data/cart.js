@@ -1,4 +1,4 @@
-export const cart = [{
+export let cart = [{
     productId: 'aaa65ef3-8d6f-4eb3-bc9b-a6ea49047d8f',
     quantity: 2
 },
@@ -35,4 +35,15 @@ export function updateCartQuantity(){
         cartQuantity += product.quantity;
     })
     document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+}
+
+export function removeFromCart(prodId){
+    const newCart = [];
+    cart.forEach((cartItem) => {
+        if (cartItem.productId !== prodId) {
+            newCart.push(cartItem);
+        }
+    });
+
+    cart = newCart;
 }
