@@ -1,6 +1,10 @@
 export const cart = [{
-    productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6"',
+    productId: 'aaa65ef3-8d6f-4eb3-bc9b-a6ea49047d8f',
     quantity: 2
+},
+{
+    productId: '15b6fc6f-327a-4ec4-896f-486349e85a3d',
+    quantity: 1
 }];
 
 export function addToCart(prodId){

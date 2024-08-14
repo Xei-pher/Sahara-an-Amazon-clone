@@ -4,16 +4,18 @@ import {formatPricing} from './utils/money.js';
 let cartItems = ``
 cart.forEach(cartItem => {
     const productId = cartItem.productId;
-
+    console.log(productId);
     let matchingProduct;
 
     products.forEach((product) => {
-        if (cartItem.productId === productId) {
+        if (product.id === productId) {
+          console.log("WOW");
             matchingProduct = product;
         }
     })
+    console.log(matchingProduct.name);
     console.log(matchingProduct.priceCents);
-    cartItems = `<div class="cart-item-container">
+    cartItems += `<div class="cart-item-container">
             <div class="delivery-date">
               Delivery date: Tuesday, June 21
             </div>
