@@ -1,8 +1,16 @@
 import { cart, addToCart, updateCartQuantity, removeFromCart, saveCart } from '../data/cart.js';
 import {products} from '../data/products.js';
 import {formatPricing} from './utils/money.js';
+
+
+
 let cartItems = ``
 cart.forEach(cartItem => {
+    const now = dayjs();
+    const nxtday = now.add(1, 'day');
+    const thirdday = now.add(3, 'day');
+    const oneweek = now.add(7, 'day');
+    console.log(now);
     const productId = cartItem.productId;
     console.log(productId);
     let matchingProduct;
@@ -54,7 +62,7 @@ cart.forEach(cartItem => {
                     name="delivery-option-${(matchingProduct.id)}">
                   <div>
                     <div class="delivery-option-date">
-                      Tuesday, June 21
+                      ${oneweek.format('dddd, MMMM D')}
                     </div>
                     <div class="delivery-option-price">
                       FREE Shipping
@@ -67,7 +75,7 @@ cart.forEach(cartItem => {
                     name="delivery-option-${(matchingProduct.id)}">
                   <div>
                     <div class="delivery-option-date">
-                      Wednesday, June 15
+                      ${thirdday.format('dddd, MMMM D')}
                     </div>
                     <div class="delivery-option-price">
                       $4.99 - Shipping
@@ -80,7 +88,7 @@ cart.forEach(cartItem => {
                     name="delivery-option-${(matchingProduct.id)}">
                   <div>
                     <div class="delivery-option-date">
-                      Monday, June 13
+                      ${nxtday.format('dddd, MMMM D')}
                     </div>
                     <div class="delivery-option-price">
                       $9.99 - Shipping
