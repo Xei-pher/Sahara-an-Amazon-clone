@@ -1,7 +1,7 @@
 import { cart, addToCart, updateCartQuantity, removeFromCart, saveCart } from '../data/cart.js';
 import {products} from '../data/products.js';
-import {formatPricing} from './utils/money.js';
-
+import formatPricing from './utils/money.js';
+import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
 
 let cartItems = ``
@@ -10,19 +10,14 @@ cart.forEach(cartItem => {
     const nxtday = now.add(1, 'day');
     const thirdday = now.add(3, 'day');
     const oneweek = now.add(7, 'day');
-    console.log(now);
     const productId = cartItem.productId;
-    console.log(productId);
     let matchingProduct;
 
     products.forEach((product) => {
         if (product.id === productId) {
-          console.log("WOW");
             matchingProduct = product;
         }
     })
-    console.log(matchingProduct.name);
-    console.log(matchingProduct.priceCents);
     cartItems += `<div class="cart-item-container js-cart-item-container-${(matchingProduct.id)}">
             <div class="delivery-date">
               Delivery date: Tuesday, June 21
