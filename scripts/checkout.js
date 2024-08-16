@@ -2,7 +2,7 @@ import { cart, addToCart, updateCartQuantity, removeFromCart, saveCart } from '.
 import {products} from '../data/products.js';
 import formatPricing from './utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-
+import { deliveryOptions } from '../data/delivery.js';
 
 let cartItems = ``
 cart.forEach(cartItem => {
