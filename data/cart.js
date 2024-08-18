@@ -49,3 +49,15 @@ export function removeFromCart(prodId){
 
     cart = newCart;
 }
+
+export function updateDelOption(productId, deliveryOptionId){
+    let matchingItem;
+    cart.forEach((cartItem) => {
+        if (cartItem.productId === productId) {
+            matchingItem = cartItem
+        }
+    });
+
+    matchingItem.deliveryOptionId = deliveryOptionId;
+    saveCart()
+}

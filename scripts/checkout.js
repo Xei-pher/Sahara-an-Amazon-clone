@@ -1,4 +1,4 @@
-import { cart, addToCart, updateCartQuantity, removeFromCart, saveCart } from '../data/cart.js';
+import { cart, addToCart, updateCartQuantity, removeFromCart, saveCart, updateDelOption } from '../data/cart.js';
 import {products} from '../data/products.js';
 import formatPricing from './utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
@@ -88,7 +88,8 @@ function delOptionsHTML(matchingProduct, cartItem){
     const priceString = delOption.priceCents === 0 ? 'FREE' : `$${formatPricing(delOption.priceCents)}`;
 
     const isChecked = delOption.id === cartItem.deliveryOptionId;
-    html += `<div class="delivery-option">
+    html += `<div class="delivery-option js-delivery-option"
+    data-product-id="${(matchingProduct.id)}" data-delivery-option-id="${(delOption.id)}">
                   <input type="radio"
                     ${isChecked ? 'checked' : ''}
                     class="delivery-option-input"
@@ -104,4 +105,12 @@ function delOptionsHTML(matchingProduct, cartItem){
                 </div>`;
   });
   return html;
-}
+};
+
+document.querySelectorAll('.js-delivery-option').forEach(button => {
+  button.addEventListener('click', () => {
+    const {productId, deliveryOptionId} = button.dataset;
+    updateDelOption(productId, deliveryOptionId);
+    console.log(cart);
+  })
+})
