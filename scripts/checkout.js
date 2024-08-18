@@ -13,10 +13,25 @@ cart.forEach(cartItem => {
         if (product.id === productId) {
             matchingProduct = product;
         }
-    })
+    });
+
+    const deliveryOptionId = cartItem.deliveryOptionId;
+
+    let deliveryOption;
+
+    deliveryOptions.forEach(delOption => {
+        if (delOption.id === deliveryOptionId) {
+            deliveryOption = delOption;
+        }
+    });
+
+    const today = dayjs()
+    const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
+    const dateString = deliveryDate.format('dddd, MMMM D');
+
     cartItems += `<div class="cart-item-container js-cart-item-container-${(matchingProduct.id)}">
             <div class="delivery-date">
-              Delivery date: Tuesday, June 21
+              Delivery date: ${dateString}
             </div>
 
             <div class="cart-item-details-grid">
@@ -47,7 +62,7 @@ cart.forEach(cartItem => {
                 <div class="delivery-options-title">
                   Choose a delivery option:
                 </div>
-                ${delOptionsHTML(matchingProduct)}
+                ${delOptionsHTML(matchingProduct, cartItem)}
               </div>
             </div>
           </div>`
@@ -63,7 +78,7 @@ document.querySelectorAll('.js-delete-item').forEach(button => {
   })
 });
 
-function delOptionsHTML(matchingProduct){
+function delOptionsHTML(matchingProduct, cartItem){
  
   let html = ''
   deliveryOptions.forEach(delOption => {
@@ -71,8 +86,11 @@ function delOptionsHTML(matchingProduct){
     const deliveryDate = today.add(delOption.deliveryDays, 'days');
     const dateString = deliveryDate.format('dddd, MMMM D');
     const priceString = delOption.priceCents === 0 ? 'FREE' : `$${formatPricing(delOption.priceCents)}`;
-    let delHTML = html += `<div class="delivery-option">
+
+    const isChecked = delOption.id === cartItem.deliveryOptionId;
+    html += `<div class="delivery-option">
                   <input type="radio"
+                    ${isChecked ? 'checked' : ''}
                     class="delivery-option-input"
                     name="delivery-option-${(matchingProduct.id)}">
                   <div>
