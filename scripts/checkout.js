@@ -30,7 +30,7 @@ cart.forEach(cartItem => {
     const dateString = deliveryDate.format('dddd, MMMM D');
 
     cartItems += `<div class="cart-item-container js-cart-item-container-${(matchingProduct.id)}">
-            <div class="delivery-date">
+            <div class="delivery-date js-delivery-date">
               Delivery date: ${dateString}
             </div>
 
@@ -112,5 +112,19 @@ document.querySelectorAll('.js-delivery-option').forEach(button => {
     const {productId, deliveryOptionId} = button.dataset;
     updateDelOption(productId, deliveryOptionId);
     console.log(cart);
+
+    let deliveryOption;
+
+    deliveryOptions.forEach(delOption => {
+        if (delOption.id === deliveryOptionId) {
+            deliveryOption = delOption;
+        }
+    });
+    
+    const today = dayjs();
+    const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
+    const dateString = deliveryDate.format('dddd, MMMM D');
+    console.log(dateString);
+    document.querySelector('.js-delivery-date').innerHTML = `Delivery date: ${dateString}`
   })
 })
