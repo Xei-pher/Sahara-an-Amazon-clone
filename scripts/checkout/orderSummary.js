@@ -66,6 +66,7 @@ export function renderOrderSummary(){
       removeFromCart(prodId);
       document.querySelector('.js-order-summary').removeChild(document.querySelector(`.js-cart-item-container-${prodId}`));
       saveCart();
+      renderPaymentSummary();
     })
   });
 
@@ -104,6 +105,7 @@ export function renderOrderSummary(){
       updateDelOption(productId, deliveryOptionId);
       console.log(cart);
       renderOrderSummary();
+      renderPaymentSummary();
     })
   })
 }
